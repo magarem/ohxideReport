@@ -7,8 +7,13 @@ export function crud(table) {
     })
     console.log('ret update:', ret)
   }
-  async function read() {
-    return await $fetch(`/api/${table}`)
+  async function read(data) {
+    if (data) {
+      return await $fetch(`/api/${table}?${data}`)
+    }
+    else {
+      return await $fetch(`/api/${table}`)
+    }
   }
   async function update(data) {
     console.log('data:', data)

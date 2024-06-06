@@ -52,7 +52,7 @@ model Reports {
   name      String
   desc      String
   file      String
-  tags      tags[]
+  tag       String
   createdAt DateTime @default(now())
 }
 
@@ -73,6 +73,6 @@ model Clients {
 
 model Config {
   id        String   @id
-  data      String
-  createdAt DateTime @default(now())
+  tipo      String   @default("")
+  data      String   @default("")
 }

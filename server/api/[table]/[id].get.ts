@@ -1,23 +1,25 @@
 import { PrismaClient } from '@prisma/client'
+
 export default defineEventHandler(async (event) => {
   try {
     // const obj = { users, clients }
     // const { users } = await import("../../../db/schema");
     // get id as function parameter from route params
-    const userId = event.context.params?.id as string;
-    console.log('----', userId);
-    
+    const queryWhere = event.context.params?.id as string
+    console.log('----', queryWhere)
+
     const prisma = new PrismaClient()
-    const usersResp = await prisma[event.context.params?.table].findUnique({
+    const usersResp = await prisma[event.context.params?.table].findFirst({
       where: {
-        id: +userId,
+        queryWhere
       },
     })
-    return usersResp;
-  } catch (e: any) {
+    return usersResp
+  }
+  catch (e: any) {
     throw createError({
       statusCode: 400,
       statusMessage: e.message,
-    });
+    })
   }
-});
+})

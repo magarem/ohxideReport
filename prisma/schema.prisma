@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        String   @id
+  name      String
+  email     String
+  username  String
+  password  String
+  role      String
+  status    String
+  createdAt DateTime @default(now())
+}
+
+model Planos {
+  id        String   @id
+  name      String
+  desc      String
+  createdAt DateTime @default(now())
+}
+
+model Client_status {
+  id        String   @id
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Userroles {
+  id        String   @id
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Tags {
+  id        String   @id
+  name      String
+  desc      String
+  Clients   Clients[]
+  createdAt DateTime @default(now())
+}
+
+model Reports {
+  id        String   @id
+  year      String
+  month     String
+  name      String
+  desc      String
+  file      String
+  tags      tags[]
+  createdAt DateTime @default(now())
+}
+
+model Clients {
+  id        String   @id
+  name      String
+  email     String
+  empresa   String
+  username  String
+  password  String
+  adesao    String
+  plano     String
+  limite    String
+  status    String
+  tags      Tags[]
+  createdAt DateTime @default(now())
+}
+
+model Config {
+  id        String   @id
+  data      String
+  createdAt DateTime @default(now())
+}

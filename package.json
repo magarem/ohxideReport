@@ -1,0 +1,54 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node .output/server/index.mjs",
+    "typecheck": "nuxt typecheck",
+    "lint:fix": "eslint . --fix",
+    "lint": "oxlint --deny-warnings -D correctness -D suspicious -D perf && eslint --max-warnings 0 .",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.11.0",
+    "@trpc/client": "^10.45.2",
+    "@trpc/server": "^10.45.2",
+    "cookie-universal-nuxt": "^2.2.2",
+    "fs": "^0.0.1-security",
+    "h3-formidable": "^1.0.0",
+    "moment": "^2.30.1",
+    "nuxt": "^3.11.2",
+    "nuxt-primevue": "^3.0.0",
+    "path": "^0.12.7",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^3.52.0",
+    "sass": "^1.77.4",
+    "superjson": "^2.2.1",
+    "trpc-nuxt": "^0.10.21",
+    "vue": "^3.4.27",
+    "vue-router": "^4.3.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.11.5",
+    "@bg-dev/nuxt-naiveui": "^1.11.0",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@sidebase/nuxt-auth": "^0.7.0",
+    "@types/node": "^20.11.30",
+    "@vueuse/core": "^10.10.0",
+    "@vueuse/nuxt": "^10.10.0",
+    "eslint": "^8.57.0",
+    "oxlint": "^0.2.15",
+    "prisma": "^5.11.0",
+    "typescript": "^5.4.3",
+    "vue-tsc": "^2.0.7"
+  },
+  "peerDependencies": {
+    "next-auth": "4.21.1"
+  }
+}

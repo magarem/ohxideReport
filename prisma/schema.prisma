@@ -41,7 +41,6 @@ model Tags {
   id        String   @id
   name      String
   desc      String
-  Clients   Clients[]
   createdAt DateTime @default(now())
 }
 
@@ -67,7 +66,7 @@ model Clients {
   plano     String
   limite    String
   status    String
-  tags      Tags[]
+  tags      String @default("")
   createdAt DateTime @default(now())
 }
 

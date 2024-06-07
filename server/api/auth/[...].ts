@@ -33,9 +33,10 @@ export default NuxtAuthHandler({
 
         // const user = { id: '1', name: 'Fidelagem', email: 'teste@teste.com', username: 'fidelis', password: '12345', role: 'admin' }
         console.log('--!!--')
-        const user = await $fetch('/api/listaUsers', {
+        const user = await $fetch('/api/loginUserCheck', {
           method: 'POST',
           body: {
+            type: credentials?.type,
             email: credentials?.email,
             password: credentials?.password
           },
@@ -46,7 +47,12 @@ export default NuxtAuthHandler({
         // if (credentials?.username === user.username && credentials?.password === user.password) {
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
-
+          // const ret = await $fetch('/api/cookieAdmin', {
+          //   method: 'POST',
+          //   body: {
+          //     user
+          //   },
+          // })
           return user
         }
         else {

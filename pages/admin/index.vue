@@ -41,8 +41,8 @@ async function sendMails() {
       <NuxtLink class="block mt-4  mb-3 lg:mt-0  hover:text-white mr-4" to="/admin/clients">
         Clientes
       </NuxtLink>
-      <NuxtLink class="block mt-4  mb-3 lg:mt-0  hover:text-white mr-4" to="/admin/products">
-        Produtos
+      <NuxtLink class="block mt-4  mb-3 lg:mt-0  hover:text-white mr-4" to="/admin/tags">
+        Tags
       </NuxtLink>
       <NuxtLink class="block mt-4  mb-3 lg:mt-0  hover:text-white mr-4" to="/admin/reports">
         Relatórios

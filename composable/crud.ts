@@ -1,4 +1,12 @@
 export function crud(table) {
+  async function raw(sql) {
+    console.log('sql:', sql)
+    const ret = await $fetch(`/api/${table}/raw`, {
+      method: 'POST',
+      body: JSON.stringify({ sql })
+    })
+    console.log('ret update:', ret)
+  }
   async function create(data) {
     console.log('data:', data)
     const ret = await $fetch(`/api/${table}`, {
@@ -77,5 +85,5 @@ else {
     console.log('sql:', sql)
     const ret = await db.exec(sql)
   }
-  return { create, read, update, del }
+  return { raw, create, read, update, del }
 }

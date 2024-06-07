@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { crud } from '../composable/crud.ts'
+
 definePageMeta({
   layout: '',
   auth: {
@@ -19,7 +21,7 @@ const user = ref({
 })
 
 async function login() {
-  const a = await signIn('credentials', { type: 'users', email: user.value.email, password: user.value.password, redirect: false })
+  const a = await signIn('credentials', { type: 'clients', email: user.value.email, password: user.value.password, redirect: false })
   console.log('login return:', a)
 
   if (a.error) {
@@ -28,12 +30,15 @@ async function login() {
   else {
     console.log('login return:', a)
 
-    const { data: ret } = await useFetch(`/api/users?email=${data.value.user.email}`)
-    delete ret.value.password
+    // const { data: ret } = await useFetch(`/api/clients?email=${data.value.user.email}`)
+    const myCrud = crud('clients')
+    const ret = await myCrud.read(`email=${data.value.user.email}`)
+    console.log('login return ret:', ret)
+    delete ret.password
     const dataUser = useCookie('user')
-    dataUser.value = ret.value
+    dataUser.value = ret
 
-    await navigateTo('/admin')
+    await navigateTo('/')
   }
 }
 </script>
@@ -44,9 +49,6 @@ async function login() {
       <div class="_flex">
         <img src="/img/logo.jpeg" style="width: 370px; margin-right: 30px; border-radius: 2%;">
         <!-- <h1 style="margin-top: 12px; margin-left: 15px;">Ohxide report system</h1> -->
-        <h1 style="margin-top: -10px; margin-left: 15px;">
-          Admin
-        </h1>
       </div>
 
       <div id="login-container">

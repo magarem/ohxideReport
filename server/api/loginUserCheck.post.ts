@@ -26,23 +26,9 @@ export default defineEventHandler(async (event) => {
   // const query = await getQuery(event)
   const token = await getToken({ event })
   console.log('token:', token)
-  const query = await getQuery(event)
-  console.log('query:', query)
+  // const query = await getQuery(event)
+  // console.log('query:', query)
   const runtimeConfig = useRuntimeConfig()
-
-  // if (query.API_ROUTE_SECRET !== runtimeConfig.API_ROUTE_SECRET) {
-  //   throw createError({
-  //     statusCode: 401,
-  //     statusMessage: 'You are not authorized to call this API.',
-  //   })
-  // }
-
-  // const authHeaderValue = getRequestHeaders(event, 'authorization')
-  // console.log('authHeaderValue.cookie:', authHeaderValue.cookie?.split('next-auth.session-token=')[1])
-
-  // if (typeof authHeaderValue === 'undefined') {
-  //   throw createError({ statusCode: 403, statusMessage: 'Need to pass valid Bearer-authorization header to access this endpoint' })
-  // }
 
   if (true) {
     try {
@@ -54,14 +40,17 @@ export default defineEventHandler(async (event) => {
     // console.log('----', userId);
       console.log('event.context.test', event.context.test)
       const body = await readBody(event)
-      console.log('username:', body.username)
+      console.log('body.email:', body.email)
 
       const prisma = new PrismaClient()
-      const usersResp = await prisma.users.findFirst({
+      const usersResp = await prisma[body.type].findFirst({
         where: {
-          ...body
+          email: body.email,
+          password: body.password
         },
       })
+      console.log('usersResp_loginUserCheck', usersResp)
+
       return usersResp
     }
     catch (e: any) {

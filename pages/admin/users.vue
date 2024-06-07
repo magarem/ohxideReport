@@ -50,6 +50,7 @@ const schema = {
 
 const myCrud = crud('users')
 const data = await myCrud.read()
+console.log('data22:', data)
 </script>
 
 <template>

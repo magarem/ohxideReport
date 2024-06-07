@@ -6,9 +6,10 @@ export default defineEventHandler(async (event) => {
 
   const go = async () => {
     const prisma = new PrismaClient()
-    if (query) {
+    let usersResp = null
+    if (JSON.stringify(query) !== '{}') {
       console.log('!!!!!---!!!', query)
-      let usersResp = null
+
       try {
         usersResp = await prisma[event.context.params?.table].findFirst({
           where: query

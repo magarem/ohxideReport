@@ -9,14 +9,11 @@ console.log(status.value)
 
 if (status.value !== 'authenticated') { navigateTo('/admin/login') }
 
-const { data: ret } = await useFetch('/api/listaUsers', {
-  method: 'POST',
-  body: {
-    email: data.value.user.email
-  },
-})
+const dataUser = toRaw(useCookie('user'))
 
-const dataUser = useStorage('user', ret.value)
+// const { data: ret } = await useFetch(`/api/users?email=${data.value.user.email}`)
+
+// const dataUser = useStorage('user', ret.value)
 
 const items = ref([
   {
@@ -98,6 +95,11 @@ const items = ref([
   //     badge: 3
   // }
 ])
+
+function signOut_() {
+  dataUser.value = null
+  signOut()
+}
 </script>
 
 <template>
@@ -119,7 +121,7 @@ const items = ref([
     <template #end>
       <div class="flex align-items-center gap-2">
         <span style="font-size: 18px;" class="mr-3">{{ dataUser?.username }}</span>
-        <Button label="Sair" severity="contrast" class="mr-5" @click="signOut" />
+        <Button label="Sair" severity="contrast" class="mr-5" @click="signOut_" />
       </div>
     </template>
   </Menubar>
@@ -148,8 +150,8 @@ const items = ref([
           <NuxtLink class="block mt-4 lg:inline-block lg:mt-0  hover:text-white mr-4" to="/admin/clients">
             Clientes
           </NuxtLink>
-          <NuxtLink class="block mt-4 lg:inline-block lg:mt-0  hover:text-white mr-4" to="/admin/products">
-            Produtos
+          <NuxtLink class="block mt-4 lg:inline-block lg:mt-0  hover:text-white mr-4" to="/admin/tags">
+            Tags
           </NuxtLink>
           <NuxtLink class="block mt-4 lg:inline-block lg:mt-0  hover:text-white mr-4" to="/admin/reports">
             Relatórios
